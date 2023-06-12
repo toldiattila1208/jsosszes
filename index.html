@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Összes JavaScript</title>
+  <style>
+    .input-container {
+      margin-bottom: 10px;
+    }
+    
+        #zoom-kep {
+          width: 200px;
+          transition: transform 0.3s;
+        }
+    
+        #zoom-kep.zoomed {
+          transform: scale(1.5);
+        }
+      
+  </style>
+</head>
+<body>
+    <h2>Input elemek, bevitel</h2>
+
+    <div>
+        <input type="text" id="nevMezo">
+        <button onclick="megjelenit()">Megjelenít</button>
+      
+        <script>
+          function megjelenit() {
+            var inputElem = document.getElementById("nevMezo");
+            var nev = inputElem.value;
+            prompt("Üdvözöllek, " + nev + "! Kérlek, add meg a korodat:");
+          }
+        </script>
+      </div>
+
+  <div class="input-container">
+    <input type="password" id="jelszoMezo">
+    <button onclick="ellenoriz()">Ellenőriz</button>
+  </div>
+<script>
+
+    function ellenoriz() {
+      var inputElem = document.getElementById("jelszoMezo");
+      var jelszo = inputElem.value;
+      if (jelszo === "titkos") {
+        alert("A jelszó helyes!");
+      } else {
+        alert("Helytelen jelszó!");
+      }
+    }
+  </script>
+
+
+<div>
+    <h2>Ciklusok</h2>
+    <button onclick="forCiklus()">For ciklus</button>
+  <button onclick="whileCiklus()">While ciklus</button>
+  <button onclick="doWhileCiklus()">Do-while ciklus</button>
+
+  <script>
+    function forCiklus() {
+      for (var i = 0; i < 3; i++) {
+        console.log("For ciklus: " + i);
+      }
+    }
+
+    function whileCiklus() {
+      var j = 0;
+      while (j < 3) {
+        console.log("While ciklus: " + j);
+        j++;
+      }
+    }
+
+    function doWhileCiklus() {
+      var k = 0;
+      do {
+        console.log("Do-while ciklus: " + k);
+        k++;
+      } while (k < 3);
+    }
+  </script>
+</div>
+
+<div>
+<h2>Egyszerű adattípusok, összetett adattípusok</h2>
+    <div>
+        <label for="szamInput">Szám:</label>
+        <input type="number" id="szamInput">
+        <button onclick="megjelenitSzam()">Megjelenít</button>
+      </div>
+    
+      <div>
+        <label for="lebegopontosInput">Lebegőpontos szám:</label>
+        <input type="number" id="lebegopontosInput">
+        <button onclick="megjelenitLebegopontos()">Megjelenít</button>
+      </div>
+    
+      <div>
+        <label for="igazHamisInput">Igaz/Hamis:</label>
+        <select id="igazHamisInput">
+          <option value="true">Igaz</option>
+          <option value="false">Hamis</option>
+        </select>
+        <button onclick="megjelenitIgazHamis()">Megjelenít</button>
+      </div>
+    
+      <div>
+        <label for="szovegInput">Szöveg:</label>
+        <input type="text" id="szovegInput">
+        <button onclick="megjelenitSzoveg()">Megjelenít</button>
+      </div>
+    
+      <div>
+        <button onclick="megjelenitTomb()">Tömb megjelenítése</button>
+        <button onclick="megjelenitObjektum()">Objektum megjelenítése</button>
+      </div>
+    
+      <div id="eredmenyek"></div>
+    
+      <script>
+        var eredmenyekDiv = document.getElementById("eredmenyek");
+    
+        function megjelenitSzam() {
+          var szamInput = document.getElementById("szamInput");
+          var szam = parseInt(szamInput.value);
+    
+          var eredmeny = document.createElement("p");
+          eredmeny.innerText = "Szám: " + szam;
+          eredmenyekDiv.appendChild(eredmeny);
+        }
+    
+        function megjelenitLebegopontos() {
+          var lebegopontosInput = document.getElementById("lebegopontosInput");
+          var lebegopontos = parseFloat(lebegopontosInput.value);
+    
+          var eredmeny = document.createElement("p");
+          eredmeny.innerText = "Lebegőpontos szám: " + lebegopontos;
+          eredmenyekDiv.appendChild(eredmeny);
+        }
+    
+        function megjelenitIgazHamis() {
+          var igazHamisInput = document.getElementById("igazHamisInput");
+          var igazHamis = igazHamisInput.value === "true";
+    
+          var eredmeny = document.createElement("p");
+          eredmeny.innerText = "Igaz/Hamis: " + igazHamis;
+          eredmenyekDiv.appendChild(eredmeny);
+        }
+    
+        function megjelenitSzoveg() {
+          var szovegInput = document.getElementById("szovegInput");
+          var szoveg = szovegInput.value;
+    
+          var eredmeny = document.createElement("p");
+          eredmeny.innerText = "Szöveg: " + szoveg;
+          eredmenyekDiv.appendChild(eredmeny);
+        }
+    
+        function megjelenitTomb() {
+          var tomb = [1, 2, 3, 4, 5];
+    
+          var eredmeny = document.createElement("p");
+          eredmeny.innerText = "Tömb: " + JSON.stringify(tomb);
+          eredmenyekDiv.appendChild(eredmeny);
+        }
+    
+        function megjelenitObjektum() {
+          var nev = prompt("Adja meg a nevet:");
+          var kor = prompt("Adja meg a kort:");
+          var varos = prompt("Adja meg a várost:");
+    
+          var objektum = { nev: nev, kor: kor, varos: varos };
+    
+          var eredmeny = document.createElement("p");
+          eredmeny.innerText = "Objektum: " + JSON.stringify(objektum);
+          eredmenyekDiv.appendChild(eredmeny);
+        }
+      </script>
+</div>
+
+<div>
+    <h2>FORM használata</h2>
+    <form id="regisztracioForm" onsubmit="regisztracio()">
+        <label for="nevInput">Név:</label>
+        <input type="text" id="nevInput" required>
+    
+        <label for="emailInput">E-mail:</label>
+        <input type="email" id="emailInput" required>
+    
+        <label for="jelszoInput">Jelszó:</label>
+        <input type="password" id="jelszoInput" required>
+    
+        <input type="submit" value="Regisztráció">
+      </form>
+    
+      <div id="eredmeny"></div>
+    
+      <script>
+        function regisztracio() {
+          event.preventDefault();
+    
+          var nevInput = document.getElementById("nevInput");
+          var emailInput = document.getElementById("emailInput");
+          var jelszoInput = document.getElementById("jelszoInput");
+    
+          var nev = nevInput.value;
+          var email = emailInput.value;
+          var jelszo = jelszoInput.value;
+    
+          var eredmenyDiv = document.getElementById("eredmeny");
+          eredmenyDiv.innerHTML = "Név: " + nev + "<br>E-mail: " + email + "<br>Jelszó: " + jelszo;
+        }
+      </script>
+</div>
+
+<div>
+    <h2>Kattints a gombra!</h2>
+
+  <button id="gomb" onclick="gombKattintas()">Kattints ide!</button>
+
+  <div id="eredmeny1"></div>
+
+  <script>
+    function gombKattintas() {
+      var eredmenyDiv = document.getElementById("eredmeny1");
+      eredmenyDiv.innerText = "A gombra kattintottál!";
+    }
+  </script>
+</div>
+
+<div>
+    <h2>Vidd a kurzort a képre!</h2>
+
+  <img id="zoom-kep" src="kep.jpg" alt="Kép">
+
+  <script>
+    var kepElem = document.getElementById("zoom-kep");
+
+    kepElem.addEventListener("mouseenter", function() {
+      kepElem.classList.add("zoomed");
+    });
+
+    kepElem.addEventListener("mouseleave", function() {
+      kepElem.classList.remove("zoomed");
+    });
+  </script>
+</div>
+
+<div>
+    <h2>Számológép</h2>
+
+  <input type="number" id="operand1" placeholder="Első szám">
+  <input type="number" id="operand2" placeholder="Második szám">
+
+  <button onclick="osszeadas()">Összeadás</button>
+  <button onclick="kivonas()">Kivonás</button>
+  <button onclick="szorzas()">Szorzás</button>
+  <button onclick="osztas()">Osztás</button>
+  <button onclick="negyzetreEmeles()">Négyzetre emelés</button>
+
+  <div id="eredmeny2"></div>
+
+  <script>
+    function osszeadas() {
+      var operand1 = parseFloat(document.getElementById("operand1").value);
+      var operand2 = parseFloat(document.getElementById("operand2").value);
+      var eredmeny = operand1 + operand2;
+
+      document.getElementById("eredmeny2").innerText = "Eredmény: " + eredmeny;
+    }
+
+    function kivonas() {
+      var operand1 = parseFloat(document.getElementById("operand1").value);
+      var operand2 = parseFloat(document.getElementById("operand2").value);
+      var eredmeny = operand1 - operand2;
+
+      document.getElementById("eredmeny2").innerText = "Eredmény: " + eredmeny;
+    }
+
+    function szorzas() {
+      var operand1 = parseFloat(document.getElementById("operand1").value);
+      var operand2 = parseFloat(document.getElementById("operand2").value);
+      var eredmeny = operand1 * operand2;
+
+      document.getElementById("eredmeny2").innerText = "Eredmény: " + eredmeny;
+    }
+
+    function osztas() {
+      var operand1 = parseFloat(document.getElementById("operand1").value);
+      var operand2 = parseFloat(document.getElementById("operand2").value);
+      var eredmeny = operand1 / operand2;
+
+      document.getElementById("eredmeny2").innerText = "Eredmény: " + eredmeny;
+    }
+
+    function negyzetreEmeles() {
+      var operand1 = parseFloat(document.getElementById("operand1").value);
+      var eredmeny = operand1 * operand1;
+
+      document.getElementById("eredmeny2").innerText = "Eredmény: " + eredmeny;
+    }
+  </script>
+</div>
+
+</body>
+</html>
